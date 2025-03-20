@@ -375,7 +375,7 @@ export var app = ({
   var update = (newState) => {
     if (state !== newState) {
       if ((state = newState) == null) dispatch = subscriptions = render = id
-      if (subscriptions) subs = patchSubs(subs, subscriptions(state), dispatch)
+      if (subscriptions && state != null) subs = patchSubs(subs, subscriptions(state), dispatch)
       if (view && !busy) requestAnimationFrame(render, (busy = true))
     }
   }
