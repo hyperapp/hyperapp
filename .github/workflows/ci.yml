@@ -2,22 +2,20 @@ name: CI
 on: push
 jobs:
   test:
-    env: 
+    env:
       NODE_ENV: development
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [18.x, 20.x, 22.x]
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
     - name: Test
       run: |
-        npm install -g codecov
         npm install
         npm test
-        codecov
